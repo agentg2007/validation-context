@@ -1,0 +1,31 @@
+{
+	"name": "validation-context",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"build": "npx tsc"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/agentg2007/validation-context.git"
+	},
+	"keywords": [
+		"react",
+		"validation"
+	],
+	"author": "Oscar Allen Gepulla",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/agentg2007/validation-context/issues"
+	},
+	"homepage": "https://github.com/agentg2007/validation-context#readme",
+	"devDependencies": {
+		"@types/react": "^18.0.12",
+		"@types/react-dom": "^18.0.5",
+		"typescript": "^4.7.3"
+	},
+	"dependencies": {
+		"react": "^18.1.0",
+		"react-dom": "^18.1.0"
+	}
+}
