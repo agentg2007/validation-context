@@ -1,0 +1,102 @@
+import _, { Dictionary } from "lodash";
+import { ReactNode, Reducer, useEffect, useReducer } from "react";
+import { log } from "../helpers";
+import {
+    ValidationContext,
+    ValidationContextActions,
+    ValidationContextInitialState,
+    ValidationContextState,
+    ValidationMessage,
+    ValidatorMethod
+} from "../models";
+
+type ValidationContextProviderProps = {
+    validators: Dictionary<ValidatorMethod>;
+    children: ReactNode[];
+}
+export const ValidationContextProvider = ({
+    children,
+    validators
+}: ValidationContextProviderProps) => {
+    const [state, dispatch] = useReducer(
+        ValidationContextProviderReducer,
+        ValidationContextInitialState
+    );
+    useEffect(() => dispatch({ type: "init", payload: validators }), []);
+    return <ValidationContext.Provider
+        value={{
+            state,
+            dispatch: (type, payload) => dispatch({ type, payload })
+        }}
+        children={children}
+    />
+};
+ValidationContextProvider.displayName = "ValidationContextProvider";
+
+type ReducerActionType = {
+    type: ValidationContextActions,
+    payload?: any;
+}
+const ValidationContextProviderReducer: Reducer<
+    ValidationContextState,
+    ReducerActionType
+> = (state, { type, payload }) => {
+    const upst = (newState: Partial<ValidationContextState>) => ({ ...state, ...newState });
+    switch (type) {
+        case "clear":
+            return upst({
+                valid: true,
+                messages: [],
+            });
+        case "init":
+            return upst({
+                valid: true,
+                messages: [],
+                validators: payload,
+            });
+        case "register": {
+            const { id, validators } = payload;
+            log(`Registering component#${id}.`, validators);
+            return upst({
+                components: {
+                    ...state.components,
+                    [id]: {
+                        valid: true,
+                        validators,
+                        messages: [],
+                    },
+                },
+            });
+        }
+        case "validate": {
+            const { id, value } = payload;
+            log(`Validating component#${id}.`, value);
+            const component = state.components[id];
+            if (!_.isNil(component)) {
+                component.valid = true;
+                component.messages = [];
+                Array.isArray(component.validators) && component.validators.forEach(c => {
+                    const result = state.validators[c.name]?.(value, c.configuration);
+                    component.valid = component.valid && result.valid === true;
+                    result.valid === false && component.messages.push(result.message);
+                });
+                const messages: ValidationMessage[] = [];
+                _.toArray(state.components).filter(i => i.valid === false).forEach(i => {
+                    i.messages.forEach(m => messages.push(m));
+                });
+                return upst({
+                    valid: _.toArray(state.components).map(i => i.valid).every(i => i === true),
+                    messages,
+                    components: {
+                        ...state.components,
+                        [id]: component
+                    }
+                })
+            } else {
+                return state;
+            }
+        }
+        default:
+            return state;
+    }
+}; 

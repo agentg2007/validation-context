@@ -1,7 +1,7 @@
 {
 	"name": "validation-context",
 	"version": "1.0.0",
-	"main": "index.js",
+	"main": "dist/index.js",
 	"scripts": {
 		"build": "npx tsc"
 	},
@@ -11,7 +11,10 @@
 	},
 	"keywords": [
 		"react",
-		"validation"
+		"form",
+		"form validation",
+		"validation",
+		"validation component"
 	],
 	"author": "Oscar Allen Gepulla",
 	"license": "MIT",
@@ -20,12 +23,16 @@
 	},
 	"homepage": "https://github.com/agentg2007/validation-context#readme",
 	"devDependencies": {
+		"@types/lodash": "^4.14.182",
 		"@types/react": "^18.0.12",
 		"@types/react-dom": "^18.0.5",
+		"@types/uuid": "^8.3.4",
 		"typescript": "^4.7.3"
 	},
 	"dependencies": {
+		"lodash": "^4.17.21",
 		"react": "^18.1.0",
-		"react-dom": "^18.1.0"
+		"react-dom": "^18.1.0",
+		"uuid": "^8.3.2"
 	}
 }
