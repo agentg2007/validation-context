@@ -67,19 +67,21 @@ const ValidationContextProviderReducer: Reducer<
                     },
                 },
             });
-        }
+        };
         case "validate": {
-            const { id, value } = payload;
-            log(`Validating component#${id}.`, value);
+            const { id, newValue, oldValue } = payload;
+            log(`Validating component#${id}.`, { newValue, oldValue });
             const component = state.components[id];
             if (!_.isNil(component)) {
                 component.valid = true;
                 component.messages = [];
-                Array.isArray(component.validators) && component.validators.forEach(c => {
-                    const result = state.validators[c.name]?.(value, c.configuration);
-                    component.valid = component.valid && result.valid === true;
-                    result.valid === false && component.messages.push(result.message);
-                });
+                Array.isArray(component.validators) && component.validators
+                    .filter(c => _.isFunction(state.validators[c.name]))
+                    .forEach(c => {
+                        const result = state.validators[c.name](newValue, oldValue, c.configuration);
+                        component.valid = component.valid && result.valid === true;
+                        result.valid === false && component.messages.push(result.message);
+                    });
                 const messages: ValidationMessage[] = [];
                 _.toArray(state.components).filter(i => i.valid === false).forEach(i => {
                     i.messages.forEach(m => messages.push(m));
@@ -95,7 +97,7 @@ const ValidationContextProviderReducer: Reducer<
             } else {
                 return state;
             }
-        }
+        };
         default:
             return state;
     }

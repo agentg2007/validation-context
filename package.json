@@ -1,9 +1,10 @@
 {
 	"name": "validation-context",
-	"version": "1.0.0",
+	"version": "1.0.0-beta-1",
 	"main": "dist/index.js",
 	"scripts": {
-		"build": "npx tsc"
+		"build": "npx tsc",
+		"prepublish": "npm run build"
 	},
 	"repository": {
 		"type": "git",
@@ -14,9 +15,10 @@
 		"form",
 		"form validation",
 		"validation",
-		"validation component"
+		"validation component",
+		"configurable form validation"
 	],
-	"author": "Oscar Allen Gepulla",
+	"author": "agentg2007",
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/agentg2007/validation-context/issues"
@@ -34,5 +36,10 @@
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
 		"uuid": "^8.3.2"
-	}
+	},
+	"files": [
+		"LICENSE.md",
+		"README.md",
+		"dist"
+	]
 }

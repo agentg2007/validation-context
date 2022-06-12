@@ -9,11 +9,11 @@ export const withValidation = <T extends InputComponentType = any>(
 ) => {
     const view = forwardRef((e: T & Partial<ValidationComponentType>, ref) => {
         const {
-            validators,
             className,
+            validators,
+            value,
             onChange,
             onValidate,
-            value,
             ...TProps
         } = e;
         const props = TProps as T;
@@ -24,38 +24,24 @@ export const withValidation = <T extends InputComponentType = any>(
         );
 
         useEffect(() => {
-            loaded === true && validate(value);
+            loaded === true && validate(value, null);
         }, [loaded]);
+        
         useEffect(() => {
             onValidate?.(valid);
-            log(`Component#${id} validated.`, { valid, value });
+            log(`Component#${id} validated.`, { valid, OrigValue: value });
         }, [valid]);
 
         return <Component {...props}
             ref={ref}
             className={`${className} ${valid === true ? "" : "error"}`}
             value={value}
-            onChange={value => {
-                validate(value);
-                onChange(value);
+            onChange={newValue => {
+                validate(newValue, value);
+                onChange(newValue);
             }}
         />
     });
     view.displayName = `${displayName ?? Component.displayName}WithValidation`;
     return view;
-};
-const TestComponent = ({ value }: InputComponentType<number> & {
-    sx?: any;
-}) => {
-    return <>{value}</>
-}
-const TestInput = withValidation(TestComponent, "TestComponent");
-const Test = () => {
-    return <TestInput
-        value={1}
-        onChange={() => { }}
-        sx={{
-            Test: "test"
-        }}
-    />
-}
+}; 

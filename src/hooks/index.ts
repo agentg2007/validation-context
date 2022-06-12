@@ -11,6 +11,7 @@ export const useComponent = () => {
     }, []);
     return ({ id: id.current, loaded });
 };
+
 export const useValidationComponent = (id: string, validators: ValidatorType[]) => {
     const { state, dispatch } = useContext(ValidationContext);
 
@@ -20,6 +21,6 @@ export const useValidationComponent = (id: string, validators: ValidatorType[]) 
 
     return {
         valid,
-        validate: (value: any) => dispatch("validate", { id, value }),
+        validate: (value: any, oldValue: any) => dispatch("validate", { id, newValue: value, oldValue }),
     }
 };
