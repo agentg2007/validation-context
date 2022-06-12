@@ -12,7 +12,7 @@ import {
 
 type ValidationContextProviderProps = {
     validators: Dictionary<ValidatorMethod>;
-    children: ReactNode[];
+    children: ReactNode | ReactNode[];
 }
 export const ValidationContextProvider = ({
     children,
