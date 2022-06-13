@@ -1,9 +1,9 @@
+import _ from "lodash";
 import { useContext, useEffect, useRef, useState } from "react";
 import { ValidationContext, ValidatorType } from "../models"
-import { v4 as uuid } from "uuid";
 
 export const useComponent = () => {
-    const id = useRef(uuid());
+    const id = useRef(_.uniqueId());
     const [loaded, setLoaded] = useState(false);
     useEffect(() => {
         setLoaded(true);

@@ -1,4 +1,4 @@
-import { ComponentType, forwardRef, useEffect } from "react";
+import React, { ComponentType, forwardRef, useEffect } from "react";
 import { log } from "../helpers";
 import { useComponent, useValidationComponent } from "../hooks";
 import { InputComponentType, ValidationComponentType } from "../models";
@@ -7,7 +7,7 @@ export const withValidation = <T extends InputComponentType = any>(
     Component: ComponentType<T>,
     displayName?: string
 ) => {
-    const view = forwardRef((e: T & Partial<ValidationComponentType>, ref) => {
+    const view = forwardRef((e: T & Partial<ValidationComponentType>, ref: any) => {
         const {
             className,
             validators,
@@ -26,7 +26,7 @@ export const withValidation = <T extends InputComponentType = any>(
         useEffect(() => {
             loaded === true && validate(value, null);
         }, [loaded]);
-        
+
         useEffect(() => {
             onValidate?.(valid);
             log(`Component#${id} validated.`, { valid, OrigValue: value });
@@ -36,7 +36,7 @@ export const withValidation = <T extends InputComponentType = any>(
             ref={ref}
             className={`${className} ${valid === true ? "" : "error"}`}
             value={value}
-            onChange={newValue => {
+            onChange={(newValue: any) => {
                 validate(newValue, value);
                 onChange(newValue);
             }}
