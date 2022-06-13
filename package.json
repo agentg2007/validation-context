@@ -1,7 +1,10 @@
 {
-	"name": "validation-context",
+	"name": "@nthity/validation-context",
 	"version": "1.0.0-rc1",
-	"main": "dist/index.js",
+	"main": "./dist/index.js",
+	"publishConfig": {
+		"tag": "next"
+	},
 	"scripts": {
 		"build": "npx tsc",
 		"prepublish": "npm run build"
