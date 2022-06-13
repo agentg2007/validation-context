@@ -1,4 +1,6 @@
+import _ from "lodash";
 import React, { ComponentType, forwardRef, useEffect } from "react";
+import { Utils } from "..";
 import { log } from "../helpers";
 import { useComponent, useValidationComponent } from "../hooks";
 import { InputComponentType, ValidationComponentType } from "../models";
@@ -18,7 +20,7 @@ export const withValidation = <T extends InputComponentType = any>(
         } = e;
         const props = TProps as T;
         const { id, loaded } = useComponent();
-        const { valid, validate } = useValidationComponent(
+        const { valid, css, validate } = useValidationComponent(
             id,
             Array.isArray(validators) ? validators : []
         );
@@ -28,13 +30,16 @@ export const withValidation = <T extends InputComponentType = any>(
         }, [loaded]);
 
         useEffect(() => {
+            if (!loaded) return;
             onValidate?.(valid);
-            log(`Component#${id} validated.`, { valid, OrigValue: value });
+            log(`Component#${id} validated.`, { valid, value });
         }, [valid]);
 
         return <Component {...props}
             ref={ref}
-            className={`${className} ${valid === true ? "" : "error"}`}
+            className={[className, valid === true ? null : css]
+                .filter(i => Utils.notEmptyString(i))
+                .join(" ")}
             value={value}
             onChange={(newValue: any) => {
                 validate(newValue, value);

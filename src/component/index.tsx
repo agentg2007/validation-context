@@ -1,5 +1,5 @@
 import _, { Dictionary } from "lodash";
-import React, { ReactNode, Reducer, useEffect, useReducer } from "react";
+import React, { ReactNode, Reducer, useEffect, useReducer, } from "react";
 import { log } from "../helpers";
 import {
     ValidationContext,
@@ -13,16 +13,23 @@ import {
 type ValidationContextProviderProps = {
     validators: Dictionary<ValidatorMethod>;
     children: ReactNode | ReactNode[];
+    classes?: {
+        error?: string;
+    }
 }
 export const ValidationContextProvider = ({
     children,
+    classes,
     validators
 }: ValidationContextProviderProps) => {
     const [state, dispatch] = useReducer(
         ValidationContextProviderReducer,
         ValidationContextInitialState
     );
-    useEffect(() => dispatch({ type: "init", payload: validators }), []);
+    useEffect(() => dispatch({
+        type: "init",
+        payload: { validators, classes }
+    }), []);
     return <ValidationContext.Provider
         value={{
             state,
@@ -48,12 +55,15 @@ const ValidationContextProviderReducer: Reducer<
                 valid: true,
                 messages: [],
             });
-        case "init":
+        case "init": {
+            const { validators, classes } = payload;
             return upst({
                 valid: true,
                 messages: [],
-                validators: payload,
+                classes,
+                validators,
             });
+        }
         case "register": {
             const { id, validators } = payload;
             log(`Registering component#${id}.`, validators);
@@ -70,8 +80,8 @@ const ValidationContextProviderReducer: Reducer<
         };
         case "validate": {
             const { id, newValue, oldValue } = payload;
-            log(`Validating component#${id}.`, { newValue, oldValue });
             const component = state.components[id];
+            log(`Validating component#${id}.`, component, { newValue, oldValue });
             if (!_.isNil(component)) {
                 component.valid = true;
                 component.messages = [];

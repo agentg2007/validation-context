@@ -1,9 +1,10 @@
 import _ from "lodash";
 import { useContext, useEffect, useRef, useState } from "react";
-import { ValidationContext, ValidatorType } from "../models"
+import { v4 as uuid } from "uuid";
+import { ValidationContext, ValidatorType } from "../models";
 
 export const useComponent = () => {
-    const id = useRef(_.uniqueId());
+    const id = useRef(uuid());
     const [loaded, setLoaded] = useState(false);
     useEffect(() => {
         setLoaded(true);
@@ -15,12 +16,17 @@ export const useComponent = () => {
 export const useValidationComponent = (id: string, validators: ValidatorType[]) => {
     const { state, dispatch } = useContext(ValidationContext);
 
-    useEffect(() => dispatch("register", { id, validators }), [id, validators]);
+    useEffect(() => {
+        if (!_.isEqual(validators, state.components[id]?.validators)) {
+            dispatch("register", { id, validators })
+        }
+    }, [id, validators]);
 
     const valid = state.components[id]?.valid === true;
 
     return {
         valid,
+        css: state.classes?.error ?? "error",
         validate: (value: any, oldValue: any) => dispatch("validate", { id, newValue: value, oldValue }),
     }
 };
