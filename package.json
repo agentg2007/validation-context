@@ -3,7 +3,8 @@
 	"version": "1.0.0-rc1",
 	"main": "./dist/index.js",
 	"publishConfig": {
-		"tag": "next"
+		"tag": "next",
+		"access": "public"
 	},
 	"scripts": {
 		"build": "npx tsc",
