@@ -1,7 +1,5 @@
-import _ from "lodash";
 import React, { ComponentType, forwardRef, useEffect } from "react";
 import { Utils } from "..";
-import { log } from "../helpers";
 import { useComponent, useValidationComponent } from "../hooks";
 import { InputComponentType, ValidationComponentType } from "../models";
 
@@ -26,13 +24,11 @@ export const withValidation = <T extends InputComponentType = any>(
         );
 
         useEffect(() => {
-            loaded === true && validate(value, null);
+            loaded && validate(value, null);
         }, [loaded]);
 
         useEffect(() => {
-            if (!loaded) return;
-            onValidate?.(valid);
-            log(`Component#${id} validated.`, { valid, value });
+            loaded && onValidate?.(valid);
         }, [valid]);
 
         return <Component {...props}

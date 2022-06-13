@@ -5,6 +5,8 @@ export { withValidation } from "./hoc";
 
 export { InputComponentType } from "./models";
 
+export { useValidationResult } from "./hooks"
+
 export const Utils = { log, error, warn, notEmptyString };
 
 export default ValidationContextProvider;

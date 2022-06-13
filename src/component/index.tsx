@@ -63,10 +63,9 @@ const ValidationContextProviderReducer: Reducer<
                 classes,
                 validators,
             });
-        }
+        };
         case "register": {
             const { id, validators } = payload;
-            log(`Registering component#${id}.`, validators);
             return upst({
                 components: {
                     ...state.components,
@@ -81,8 +80,8 @@ const ValidationContextProviderReducer: Reducer<
         case "validate": {
             const { id, newValue, oldValue } = payload;
             const component = state.components[id];
-            log(`Validating component#${id}.`, component, { newValue, oldValue });
             if (!_.isNil(component)) {
+                log(`Validating component#${id}.`, { newValue, oldValue }, ...component.validators);
                 component.valid = true;
                 component.messages = [];
                 Array.isArray(component.validators) && component.validators
@@ -90,7 +89,12 @@ const ValidationContextProviderReducer: Reducer<
                     .forEach(c => {
                         const result = state.validators[c.name](newValue, oldValue, c.configuration);
                         component.valid = component.valid && result.valid === true;
-                        result.valid === false && component.messages.push(result.message);
+                        result.valid === false
+                            && !_.isNil(result.message)
+                            && component.messages.push({
+                                type: result.message.type,
+                                message: c.message ?? result.message.message ?? "Invalid result!"
+                            });
                     });
                 const messages: ValidationMessage[] = [];
                 _.toArray(state.components).filter(i => i.valid === false).forEach(i => {

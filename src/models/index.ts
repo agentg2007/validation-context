@@ -9,12 +9,13 @@ export type InputComponentType<T = any> = {
 
 export type ValidatorType = {
     name: string;
+    message?: string;
     configuration?: any;
 };
 
 export type ValidatorMethodResult = {
     valid: boolean;
-    message: ValidationMessage;
+    message?: ValidationMessage;
 };
 
 export type ValidatorMethod = (

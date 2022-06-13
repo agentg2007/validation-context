@@ -30,3 +30,11 @@ export const useValidationComponent = (id: string, validators: ValidatorType[]) 
         validate: (value: any, oldValue: any) => dispatch("validate", { id, newValue: value, oldValue }),
     }
 };
+
+export const useValidationResult = () => {
+    const { state } = useContext(ValidationContext);
+    return ({
+        valid: state.valid,
+        messages: state.messages
+    })
+}
