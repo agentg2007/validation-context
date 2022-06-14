@@ -1,5 +1,4 @@
 import React, { ComponentType, forwardRef, useEffect } from "react";
-import { Utils } from "..";
 import { useComponent, useValidationComponent } from "../hooks";
 import { InputComponentType, ValidationComponentType } from "../models";
 
@@ -9,7 +8,6 @@ export const withValidation = <T extends InputComponentType = any>(
 ) => {
     const view = forwardRef((e: T & Partial<ValidationComponentType>, ref: any) => {
         const {
-            className,
             validators,
             value,
             onChange,
@@ -18,7 +16,7 @@ export const withValidation = <T extends InputComponentType = any>(
         } = e;
         const props = TProps as T;
         const { id, loaded } = useComponent();
-        const { valid, css, messages, validate } = useValidationComponent(
+        const { valid, messages, validate } = useValidationComponent(
             id,
             Array.isArray(validators) ? validators : []
         );
@@ -32,10 +30,8 @@ export const withValidation = <T extends InputComponentType = any>(
         }, [valid]);
 
         return <Component {...props}
+            componentId={id}
             ref={ref}
-            className={[className, valid === true ? null : css]
-                .filter(i => Utils.notEmptyString(i))
-                .join(" ")}
             value={value}
             onChange={(newValue: any) => {
                 validate(newValue, value);

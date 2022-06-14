@@ -3,6 +3,7 @@ import { createContext } from "react";
 
 export type InputComponentType<T = any> = {
     className?: string;
+    componentId?: string;
     value: T;
     onChange(newValue: T): void;
 };

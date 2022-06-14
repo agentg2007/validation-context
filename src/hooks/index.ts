@@ -26,7 +26,6 @@ export const useValidationComponent = (id: string, validators: ValidatorType[]) 
 
     return {
         valid,
-        css: state.classes?.error ?? "error",
         messages: state.components[id]?.messages,
         validate: (value: any, oldValue: any) => dispatch("validate", { id, newValue: value, oldValue }),
     }
@@ -38,4 +37,12 @@ export const useValidationResult = () => {
         valid: state.valid,
         messages: state.messages
     })
-}
+};
+
+export const useValidationState = (componentId: string) => {
+    const { state } = useContext(ValidationContext);
+    return {
+        ...state.components[componentId],
+        css: state.classes?.error ?? "error"
+    };
+};
