@@ -18,7 +18,7 @@ export const withValidation = <T extends InputComponentType = any>(
         } = e;
         const props = TProps as T;
         const { id, loaded } = useComponent();
-        const { valid, css, validate } = useValidationComponent(
+        const { valid, css, messages, validate } = useValidationComponent(
             id,
             Array.isArray(validators) ? validators : []
         );
@@ -28,7 +28,7 @@ export const withValidation = <T extends InputComponentType = any>(
         }, [loaded]);
 
         useEffect(() => {
-            loaded && onValidate?.(valid);
+            loaded && onValidate?.(valid, messages);
         }, [valid]);
 
         return <Component {...props}

@@ -10,7 +10,6 @@ export type InputComponentType<T = any> = {
 export type ValidatorType = {
     name: string;
     message?: string;
-    configuration?: any;
 };
 
 export type ValidatorMethodResult = {
@@ -21,12 +20,12 @@ export type ValidatorMethodResult = {
 export type ValidatorMethod = (
     newValue: any,
     oldValue: any,
-    configuration: any
+    e: any
 ) => ValidatorMethodResult;
 
 export type ValidationComponentType = {
-    validators: ValidatorType[];
-    onValidate(valid: boolean): void;
+    validators: (ValidatorType & any)[];
+    onValidate(valid: boolean, messages: ValidationMessage[]): void;
 };
 
 export type ValidationMessage = {

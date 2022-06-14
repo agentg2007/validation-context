@@ -86,14 +86,14 @@ const ValidationContextProviderReducer: Reducer<
                 component.messages = [];
                 Array.isArray(component.validators) && component.validators
                     .filter(c => _.isFunction(state.validators[c.name]))
-                    .forEach(c => {
-                        const result = state.validators[c.name](newValue, oldValue, c.configuration);
+                    .forEach(({ name, ...c }) => {
+                        const result = state.validators[name](newValue, oldValue, c);
                         component.valid = component.valid && result.valid === true;
                         result.valid === false
                             && !_.isNil(result.message)
                             && component.messages.push({
                                 type: result.message.type,
-                                message: c.message ?? result.message.message ?? "Invalid result!"
+                                message: c.message ?? result.message.message ?? "Invalid value!"
                             });
                     });
                 const messages: ValidationMessage[] = [];

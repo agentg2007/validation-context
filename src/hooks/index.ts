@@ -27,6 +27,7 @@ export const useValidationComponent = (id: string, validators: ValidatorType[]) 
     return {
         valid,
         css: state.classes?.error ?? "error",
+        messages: state.components[id]?.messages,
         validate: (value: any, oldValue: any) => dispatch("validate", { id, newValue: value, oldValue }),
     }
 };
