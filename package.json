@@ -1,12 +1,13 @@
 {
 	"name": "@nthity/validation",
-	"version": "1.0.0-rc2",
+	"version": "1.0.0-rc3",
 	"main": "./dist/index.js",
 	"publishConfig": {
 		"tag": "next",
 		"access": "public"
 	},
 	"scripts": {
+		"test": "npx tsc -w",
 		"build": "npx tsc",
 		"prepublish": "npm run build"
 	},

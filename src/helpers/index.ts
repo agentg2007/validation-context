@@ -18,4 +18,5 @@ export const log = (...e: any) => writeLog("default", ...e);
 export const error = (...e: any[]) => writeLog("error", ...e);
 export const warn = (...e: any[]) => writeLog("warn", ...e);
 
+export const between = (value: any, min: any, max: any) => value > min && value < max;
 export const notEmptyString = (value: any): value is string => _.isString(value) && value.trim().length > 0;
