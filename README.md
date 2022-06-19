@@ -103,4 +103,4 @@ const ButtonPanel = () => {
 
 ## WIKI
 
-You can also check our [wiki](https://github.com/agentg2007/validation-context.wiki.git) 
+You can also check our [wiki](https://github.com/agentg2007/validation-context/wiki) 
