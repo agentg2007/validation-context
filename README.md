@@ -85,21 +85,3 @@ const ButtonPanel = () => {
   );
 };
 ```
-
----
-
-## Predefined Validators
-
-| Name                                | Description                                                                                                                            |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **RequiredFieldValidator**          | This validator is used to make an input control required.                                                                              |
-| **NumberInputFieldValidator**       | This validator is used to ensure input value is number.                                                                                |
-| **NumberRangeFieldValidator**       | This validator evaluates the value of an input control to check that the value lies between specified ranges.                          |
-| **DateTimeRangeFieldValidator**     | This validator evaluates the value of an input control to check that the date value lies between specified ranges.                     |
-| **EmailFieldValidator**             | This validator evaluates the value of input control value is a valid email address.                                                    |
-| **UrlFieldValidator**               | This validator evaluates the value of input control value is a valid url address.                                                      |
-| **StringLengthFieldValidator**      | This validator evaluates the value of an input control to check that the string value length lies between specified ranges.            |
-| **SelectedItemCountFieldValidator** | This validator evaluates the value of an input control to check that the number of selected items count lies between specified ranges. |
-
----
-
