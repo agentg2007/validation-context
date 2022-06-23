@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { useContext, useEffect, useRef, useState } from "react";
-import { v4 as uuid } from "uuid";
+import { uuid } from "../helpers";
 import { ValidationContext, ValidatorType } from "../models";
 
 export const useComponent = () => {

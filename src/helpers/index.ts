@@ -20,3 +20,16 @@ export const warn = (...e: any[]) => writeLog("warn", ...e);
 
 export const between = (value: any, min: any, max: any) => value > min && value < max;
 export const notEmptyString = (value: any): value is string => _.isString(value) && value.trim().length > 0;
+
+export const uuid = () => {
+    var dt = new Date().getTime();
+    var uuid = 'xxxxxxxx-yxxx-yxxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (dt + Math.random() * 16) % 16 | 0;
+        dt = Math.floor(dt / 16);
+        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+    return uuid;
+};
+export const isGuid = (value: any): value is string => {
+    return notEmptyString(value) && /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i.test(value.toLowerCase());
+};
