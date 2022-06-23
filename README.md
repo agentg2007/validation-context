@@ -1,8 +1,10 @@
 # **@nthity/validation**
 
-@nthity/validation is a easy to use validation for react components.
+> @nthity/validation is a easy to use validation for react components.
 
----
+## WIKI
+
+Please check our [wiki](https://github.com/agentg2007/validation-context/wiki) for more complete documentation.
 
 ## Usage
 
@@ -101,6 +103,3 @@ const ButtonPanel = () => {
 
 ---
 
-## WIKI
-
-You can also check our [wiki](https://github.com/agentg2007/validation-context/wiki) 
