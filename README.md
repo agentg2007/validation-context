@@ -85,3 +85,8 @@ const ButtonPanel = () => {
   );
 };
 ```
+
+
+# Change Log:
+You can also access our [change log](https://github.com/agentg2007/validation-context/blob/main/CHANGELOG.md).
+
