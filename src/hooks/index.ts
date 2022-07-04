@@ -39,10 +39,7 @@ export const useValidationResult = () => {
     })
 };
 
-export const useValidationState = (componentId: string) => {
+export const useComponentValidationState = (componentId: string) => {
     const { state } = useContext(ValidationContext);
-    return {
-        ...state.components[componentId],
-        css: state.classes?.error ?? "error"
-    };
+    return { ...state.components[componentId] };
 };

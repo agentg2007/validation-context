@@ -6,7 +6,7 @@ export const withValidation = <T extends InputComponentType = any>(
     Component: ComponentType<T>,
     displayName?: string
 ) => {
-    const view = forwardRef((e: T & Partial<ValidationComponentType>, ref: any) => {
+    const view = forwardRef((e: Omit<T, "componentId"> & Partial<ValidationComponentType>, ref: any) => {
         const {
             validators,
             value,
@@ -39,6 +39,6 @@ export const withValidation = <T extends InputComponentType = any>(
             }}
         />
     });
-    view.displayName = `${displayName ?? Component.displayName}WithValidation`;
+    view.displayName = `${displayName ?? Component.displayName ?? "UnknownInput"}WithValidation`;
     return view;
 }; 

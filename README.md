@@ -11,16 +11,19 @@ Please check our [wiki](https://github.com/agentg2007/validation-context/wiki) f
 ### Creating input components
 
 ```typescript
-import { InputComponentType, withValidation } from "@nthity/validation";
+import {} from "react";
+import {
+  InputComponentType,
+  useComponentValidationState,
+  withValidation,
+} from "@nthity/validation";
 
 const Input = withValidation<InputComponentType<string>>((props) => {
   const { className = "", componentId, value, onChange } = props;
-  const { valid, css, messages } = useValidationState(componentId);
+  const { valid, messages } = useComponentValidationState(componentId);
   return (
-    <div className={className}>
-      <div className={valid ? "" : css}>
-        <input value={value} onChange={(e) => onChange(e.target.value)} />
-      </div>
+    <div className={`${className} ${valid ? "" : "error"}`}>
+      <input value={value} onChange={(e) => onChange(e.target.value)} />
     </div>
   );
 }, "InputDisplayName");
@@ -86,7 +89,6 @@ const ButtonPanel = () => {
 };
 ```
 
-
 # Change Log:
-You can also access our [change log](https://github.com/agentg2007/validation-context/blob/main/CHANGELOG.md).
 
+You can also access our [change log](https://github.com/agentg2007/validation-context/blob/main/CHANGELOG.md).
