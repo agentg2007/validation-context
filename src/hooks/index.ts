@@ -39,7 +39,7 @@ export const useValidationResult = () => {
     })
 };
 
-export const useComponentValidationState = (componentId: string) => {
+export const useValidationState = (componentId: string) => {
     const { state } = useContext(ValidationContext);
     return { ...state.components[componentId] };
 };

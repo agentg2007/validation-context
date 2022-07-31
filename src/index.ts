@@ -3,8 +3,7 @@ import { error, log, notEmptyString, warn } from "./helpers";
 
 export { withValidation } from "./hoc";
 export {
-    useComponentValidationState,
-    useValidationResult
+    useValidationResult, useValidationState
 } from "./hooks";
 export {
     InputComponentType,
