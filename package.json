@@ -1,10 +1,14 @@
 {
 	"name": "@nthity/validation",
-	"version": "1.2.0-beta1",
-	"main": "./dist/index.js",
+	"version": "1.2.0-beta2",
+	"main": "./index.js",
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"test": "npx tsc -w",
-		"build": "npx tsc",
+		"clean": "rm -rf components helpers hoc hooks models validators index.js index.d.ts index.d.ts.map",
+		"build": "npm run clean && npx tsc",
 		"prepublish": "npm run build"
 	},
 	"repository": {
@@ -25,7 +29,7 @@
 		"url": "https://github.com/agentg2007/validation-context/issues"
 	},
 	"homepage": "https://github.com/agentg2007/validation-context#readme",
-	"peerDependencies": {
+	"dependencies": {
 		"lodash": "^4.17.21",
 		"react": "^18.0.0"
 	},
@@ -37,6 +41,12 @@
 	"files": [
 		"LICENSE.md",
 		"README.md",
-		"dist"
+		"index.js",
+		"components",
+		"helpers",
+		"hoc",
+		"hooks",
+		"models",
+		"validators"
 	]
 }

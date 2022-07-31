@@ -103,4 +103,12 @@ dist
 # TernJS port file
 .tern-port
 
-test.ts
+*.d.ts
+*.d.ts.map
+/index.js
+/components
+/helpers
+/hooks
+/models
+/hoc
+/validators

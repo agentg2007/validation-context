@@ -11,7 +11,7 @@ Please check our [wiki](https://github.com/agentg2007/validation-context/wiki) f
 ### Creating input components
 
 ```typescript
-import {} from "react";
+import React from "react";
 import {
   InputComponentType,
   useComponentValidationState,
