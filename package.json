@@ -1,6 +1,6 @@
 {
 	"name": "@nthity/validation",
-	"version": "1.2.0-beta5",
+	"version": "1.2.0",
 	"main": "./index.js",
 	"publishConfig": {
 		"access": "public"
