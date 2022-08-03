@@ -2,9 +2,7 @@ import { ValidationContextProvider } from "./components";
 import { error, log, notEmptyString, warn } from "./helpers";
 
 export { withValidation } from "./hoc";
-export {
-    useValidationResult, useValidationState
-} from "./hooks";
+export { useComponentValidationState, useValidationResult } from "./hooks";
 export {
     InputComponentType,
     ValidatorMethod

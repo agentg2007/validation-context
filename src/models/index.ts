@@ -36,7 +36,7 @@ export type ValidationMessage = {
 
 export type ValidationContextClasses = {
     error: string;
-}
+};
 
 export type ValidationContextState = {
     valid: boolean;
@@ -46,7 +46,6 @@ export type ValidationContextState = {
         validators: ValidatorType[];
         messages: ValidationMessage[];
     }>;
-    classes: Partial<ValidationContextClasses>;
     validators: Dictionary<ValidatorMethod>;
 };
 
@@ -61,12 +60,9 @@ export type ValidationContextType = {
 };
 
 export const ValidationContextInitialState: ValidationContextState = {
-    valid: true,
-    messages: [],
     components: {},
-    classes: {
-        error: "error"
-    },
+    messages: [],
+    valid: true,
     validators: {},
 };
 

@@ -13,13 +13,9 @@ import {
 type ValidationContextProviderProps = {
     validators: Dictionary<ValidatorMethod>;
     children: ReactNode | ReactNode[];
-    classes?: {
-        error?: string;
-    }
 }
 export const ValidationContextProvider = ({
     children,
-    classes,
     validators
 }: ValidationContextProviderProps) => {
     const [state, dispatch] = useReducer(
@@ -28,7 +24,7 @@ export const ValidationContextProvider = ({
     );
     useEffect(() => dispatch({
         type: "init",
-        payload: { validators, classes }
+        payload: { validators }
     }), []);
     return <ValidationContext.Provider
         value={{
@@ -56,11 +52,10 @@ const ValidationContextProviderReducer: Reducer<
                 messages: [],
             });
         case "init": {
-            const { validators, classes } = payload;
+            const { validators } = payload;
             return upst({
                 valid: true,
                 messages: [],
-                classes,
                 validators,
             });
         };

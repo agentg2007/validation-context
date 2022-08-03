@@ -13,6 +13,11 @@ export const useComponent = () => {
     return ({ id: id.current, loaded });
 };
 
+export const useComponentValidationState = (componentId: string) => {
+    const { state } = useContext(ValidationContext);
+    return { ...state.components[componentId] };
+};
+
 export const useValidationComponent = (id: string, validators: ValidatorType[]) => {
     const { state, dispatch } = useContext(ValidationContext);
 
@@ -37,9 +42,4 @@ export const useValidationResult = () => {
         valid: state.valid,
         messages: state.messages
     })
-};
-
-export const useValidationState = (componentId: string) => {
-    const { state } = useContext(ValidationContext);
-    return { ...state.components[componentId] };
 };
